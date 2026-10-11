@@ -1,0 +1,63 @@
+expenses = []
+
+while True:
+    print("\n===== EXPENSE TRACKER =====")
+    print("1. Add Expense")
+    print("2. View Expenses")
+    print("3. Show Total")
+    print("4. Delete Expense")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        name = input("Enter expense name: ")
+        amount = float(input("Enter amount: "))
+
+        expense = {
+            "name": name,
+            "amount": amount
+        }
+
+        expenses.append(expense)
+
+        print("Expense added successfully!")
+
+    elif choice == "2":
+        if len(expenses) == 0:
+            print("No expenses found.")
+        else:
+            print("\nYour Expenses:")
+
+            for i, expense in enumerate(expenses, start=1):
+                print(i, ".", expense["name"], "-", expense["amount"])
+
+    elif choice == "3":
+        total = 0
+
+        for expense in expenses:
+            total = total + expense["amount"]
+
+        print("Total expenses:", total)
+
+    elif choice == "4":
+        if len(expenses) == 0:
+            print("No expenses to delete.")
+        else:
+            for i, expense in enumerate(expenses, start=1):
+                print(i, ".", expense["name"], "-", expense["amount"])
+
+            number = int(input("Enter expense number to delete: "))
+
+            if 1 <= number <= len(expenses):
+                deleted = expenses.pop(number - 1)
+                print(deleted["name"], "deleted successfully!")
+            else:
+                print("Invalid expense number.")
+
+    elif choice == "5":
+        print("Thank you for using Expense Tracker!")
+        break
+
+    else:
+        print("Invalid choice. Please try again.")
